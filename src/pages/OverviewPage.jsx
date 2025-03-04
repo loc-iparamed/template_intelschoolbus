@@ -57,7 +57,7 @@ const OverviewPage = () => {
             color="#6366F1"
           />
           <StatCard
-            name="Config Led"
+            name="Lat"
             icon={Zap}
             value={configLedValue}
             color="#FACC15"

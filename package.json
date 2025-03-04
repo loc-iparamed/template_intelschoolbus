@@ -1,6 +1,6 @@
 {
   "name": "admin-dashboard",
-  "homepage": "https://loc-iparamed.github.io/template_intelschoolbus",
+  "homepage": "/template_intelschoolbus/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
