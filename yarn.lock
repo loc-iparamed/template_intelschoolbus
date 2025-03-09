@@ -551,6 +551,16 @@
   resolved "https://registry.yarnpkg.com/@putout/minify/-/minify-4.12.3.tgz#83505753305fed2fcd9dc1ecbe0351685e15aa52"
   integrity sha512-PLGgelp3fDAaAxKatkkBmtmBWUkE2JpArrhtJhIvoycSQV5bjoyznbKLhZEtbql+Ns3JDYdsJ/kN2js6+pMuLQ==
 
+"@ramonak/react-progress-bar@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@ramonak/react-progress-bar/-/react-progress-bar-5.3.0.tgz#b066faf1b332b6a5f51d83b5935da5f8cf1deecf"
+  integrity sha512-PjpOcSBAVSQNyx2cvYyBCI14Tg2eFM0psC9m2ic33PYBIdOzO9/DieWndq9BUQTSjIIarhSpa/lqJ33W/mFJMw==
+
+"@react-leaflet/core@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@react-leaflet/core/-/core-3.0.0.tgz#34ccc280ce7d8ac5c09f2b3d5fffded450bdf1a2"
+  integrity sha512-3EWmekh4Nz+pGcr+xjf0KNyYfC3U2JjnkWsh0zcqaexYqmmB5ZhH37kz41JXGmKzpaMZCnPofBBm64i+YrEvGQ==
+
 "@remix-run/router@1.23.0":
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.23.0.tgz#35390d0e7779626c026b11376da6789eb8389242"
@@ -650,6 +660,33 @@
   version "4.34.9"
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.34.9.tgz#1973871850856ae72bc678aeb066ab952330e923"
   integrity sha512-AyleYRPU7+rgkMWbEh71fQlrzRfeP6SyMnRf9XX4fCdDPAJumdSBqYEcWPMzVQ4ScAl7E4oFfK0GUVn77xSwbw==
+
+"@svgdotjs/svg.draggable.js@^3.0.4":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@svgdotjs/svg.draggable.js/-/svg.draggable.js-3.0.6.tgz#bca1065ec27b1dbae5a92a0558777ed964a395cb"
+  integrity sha512-7iJFm9lL3C40HQcqzEfezK2l+dW2CpoVY3b77KQGqc8GXWa6LhhmX5Ckv7alQfUXBuZbjpICZ+Dvq1czlGx7gA==
+
+"@svgdotjs/svg.filter.js@^3.0.8":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@svgdotjs/svg.filter.js/-/svg.filter.js-3.0.9.tgz#758e336b79e73a6797358d655b60842131a9a52b"
+  integrity sha512-/69XMRCDoam2HgC4ldHIaDgeQf1ViHIsa0Ld4uWgiXtZ+E24DWHe/9Ib6kbNiZ7WRIdlVokUDR1Fg0kjIpkfbw==
+  dependencies:
+    "@svgdotjs/svg.js" "^3.2.4"
+
+"@svgdotjs/svg.js@^3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@svgdotjs/svg.js/-/svg.js-3.2.4.tgz#4716be92a64c66b29921b63f7235fcfb953fb13a"
+  integrity sha512-BjJ/7vWNowlX3Z8O4ywT58DqbNRyYlkk6Yz/D13aB7hGmfQTvGX4Tkgtm/ApYlu9M7lCQi15xUEidqMUmdMYwg==
+
+"@svgdotjs/svg.resize.js@^2.0.2":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@svgdotjs/svg.resize.js/-/svg.resize.js-2.0.5.tgz#732e4cae15d09ad3021adeac63bc9fad0dc7255a"
+  integrity sha512-4heRW4B1QrJeENfi7326lUPYBCevj78FJs8kfeDxn5st0IYPIRXoTtOSYvTzFWgaWWXd3YCDE6ao4fmv91RthA==
+
+"@svgdotjs/svg.select.js@^4.0.1":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@svgdotjs/svg.select.js/-/svg.select.js-4.0.2.tgz#80a10409e6c73206218690eac5c9f94f8c8909b5"
+  integrity sha512-5gWdrvoQX3keo03SCmgaBbD+kFftq0F/f2bzCbNnpkkvW6tk4rl4MakORzFuNjvXPWwB4az9GwuvVxQVnjaK2g==
 
 "@swc/core-darwin-arm64@1.11.6":
   version "1.11.6"
@@ -855,6 +892,11 @@
     "@types/babel__core" "^7.20.5"
     react-refresh "^0.14.2"
 
+"@yr/monotone-cubic-spline@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@yr/monotone-cubic-spline/-/monotone-cubic-spline-1.0.3.tgz#7272d89f8e4f6fb7a1600c28c378cc18d3b577b9"
+  integrity sha512-FQXkOta0XBSUPHndIKON2Y9JeQz5ZeMqLYZVVK93FliNBFm7LNMIZmY6FrMEB9XPcDbE2bekMbZD6kzDkxwYjA==
+
 acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"
@@ -909,6 +951,18 @@ anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+apexcharts@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-4.5.0.tgz#efddb1a9b48e5add201df1549ac654412182e1f9"
+  integrity sha512-E7ZkrVqPNBUWy/Rmg8DEIqHNBmElzICE/oxOX5Ekvs2ICQUOK/VkEkMH09JGJu+O/EA0NL31hxlmF+wrwrSLaQ==
+  dependencies:
+    "@svgdotjs/svg.draggable.js" "^3.0.4"
+    "@svgdotjs/svg.filter.js" "^3.0.8"
+    "@svgdotjs/svg.js" "^3.2.4"
+    "@svgdotjs/svg.resize.js" "^2.0.2"
+    "@svgdotjs/svg.select.js" "^4.0.1"
+    "@yr/monotone-cubic-spline" "^1.0.3"
 
 arg@^5.0.2:
   version "5.0.2"
@@ -2495,6 +2549,11 @@ keyv@^4.5.3:
   dependencies:
     json-buffer "3.0.1"
 
+leaflet@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.9.4.tgz#23fae724e282fa25745aff82ca4d394748db7d8d"
+  integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
+
 levn@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.4.1.tgz#ae4562c007473b932a6200d403268dd2fffc6ade"
@@ -3013,6 +3072,13 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
+react-apexcharts@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-apexcharts/-/react-apexcharts-1.7.0.tgz#bbd08425674224adb27c9f2c62477d43bd5de539"
+  integrity sha512-03oScKJyNLRf0Oe+ihJxFZliBQM9vW3UWwomVn4YVRTN1jsIR58dLWt0v1sb8RwJVHDMbeHiKQueM0KGpn7nOA==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-dom@^18.3.1:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.3.1.tgz#c2265d79511b57d479b3dd3fdfa51536494c5cb4"
@@ -3020,6 +3086,11 @@ react-dom@^18.3.1:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
+
+react-hook-form@^7.54.2:
+  version "7.54.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.54.2.tgz#8c26ed54c71628dff57ccd3c074b1dd377cfb211"
+  integrity sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==
 
 react-is@^16.13.1:
   version "16.13.1"
@@ -3030,6 +3101,13 @@ react-is@^18.3.1:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
+
+react-leaflet@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-5.0.0.tgz#945d40bad13b69e8606278b19446b00bab57376a"
+  integrity sha512-CWbTpr5vcHw5bt9i4zSlPEVQdTVcML390TjeDG0cK59z1ylexpqC6M1PJFjV8jD7CF+ACBFsLIDs6DRMoLEofw==
+  dependencies:
+    "@react-leaflet/core" "^3.0.0"
 
 react-refresh@^0.14.2:
   version "0.14.2"
@@ -3059,6 +3137,11 @@ react-smooth@^4.0.4:
     fast-equals "^5.0.1"
     prop-types "^15.8.1"
     react-transition-group "^4.4.5"
+
+react-speedometer@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-speedometer/-/react-speedometer-0.1.2.tgz#b12068dee47db025780d7b0c8c776f3bed5fcff5"
+  integrity sha512-FkcDnDoNax7z1nJWCQev8TGuTLKMewUR7FH7QaaN+fxW9ZAzHdZw7cvDJOvvjuEBTtyP22PtRBGvVkaYvVQNFg==
 
 react-transition-group@^4.4.5:
   version "4.4.5"
