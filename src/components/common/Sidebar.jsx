@@ -36,8 +36,8 @@ const Sidebar = () => {
           whileHover={{scale: 1.1}}
           whileTap={{scale: 0.9}}
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit">
-          <Menu size={24} />
+          className="p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit mt-6">
+          <Menu size={35} />
         </motion.button>
 
         {/* Sidebar Items */}
@@ -50,7 +50,7 @@ const Sidebar = () => {
                 <motion.div
                   className={`flex items-center p-4 text-sm font-medium rounded-lg transition-colors mb-2 
                     ${isActive ? 'bg-cyan-700 bg-opacity-70' : 'hover:bg-gray-700 bg-opacity-70'}`}>
-                  <Icon size={20} style={{color, minWidth: '20px'}} />
+                  <Icon size={25} style={{color, minWidth: '20px'}} />
                   <AnimatePresence>
                     {isSidebarOpen && (
                       <motion.span

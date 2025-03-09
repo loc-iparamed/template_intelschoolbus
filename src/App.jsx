@@ -4,8 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import DashBoardPage from './pages/DashboardPage';
 import PresentsPage from './pages/ViewPage';
 import UsersPage from './pages/UsersPage';
-import MapPage from './pages/MapPage';
-import SalesPage from './pages/SalesPage';
+import PeoplePresentChart from './components/people_present_chart/PeoplePresentChart';
 import OrdersPage from './pages/OrdersPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import SettingsPage from './pages/SettingsPage';
@@ -14,7 +13,7 @@ const routes = [
   {path: '/', element: <DashBoardPage />},
   {path: '/presents', element: <PresentsPage />},
   {path: '/users', element: <UsersPage />},
-  {path: '/sales', element: <MapPage />},
+  {path: '/sales', element: <PeoplePresentChart />},
   {path: '/orders', element: <OrdersPage />},
   {path: '/analytics', element: <AnalyticsPage />},
   {path: '/settings', element: <SettingsPage />},
