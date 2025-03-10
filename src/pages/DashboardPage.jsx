@@ -13,12 +13,13 @@ import CategoryDistributionChart from '../components/overview/CategoryDistributi
 import MapComponent from '../components/map/MapComponent';
 import GetOnOffChart from '../components/overview/GetOnOffChart';
 import LocationDisplay from '../components/locationdisplay/LocationDisplay';
+import CapturePhoto from '../components/capturephoto/CapurePhoto';
 
 const DashBoardPage = () => {
   const [dashboardData, setDashboardData] = useState({
     peopleGetOn: 4,
     peopleGetOff: 2,
-    peoplePresent: 2,
+    peoplePresent: 0,
     latitude: 10.784239,
     longitude: 106.6403606,
     speed: 45,
@@ -117,7 +118,7 @@ const DashBoardPage = () => {
             />
             <PeoplePresentChart peoplePresent={dashboardData.peoplePresent} />
           </div>
-          <CategoryDistributionChart />
+          <CapturePhoto peoplePresent={dashboardData.peoplePresent} />
         </motion.div>
 
         <motion.div
