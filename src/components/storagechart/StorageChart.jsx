@@ -40,7 +40,7 @@ const StorageChart = ({totalGb, usedGb, freeGb}) => {
               cx={'50%'}
               cy={'50%'}
               labelLine={true}
-              outerRadius={120}
+              outerRadius={130}
               fill="#8884d8"
               dataKey="value"
               label={({name, percent}) =>

@@ -8,8 +8,10 @@ import StatCard from '../components/common/StatCard';
 import StatCardCustom from '../components/common/StatCardCustom';
 import StorageChart from '../components/storagechart/StorageChart';
 import ThermalCpu from '../components/thermalcpu/ThermalCpu';
+import UsageCpu from '../components/UsageCpu/UsageCpu';
+import NetworkSpeed from '../components/networkspeed/NetworkSpeed';
 import PeoplePresentChart from '../components/people_present_chart/PeoplePresentChart';
-import CategoryDistributionChart from '../components/overview/CategoryDistributionChart';
+
 import MapComponent from '../components/map/MapComponent';
 import GetOnOffChart from '../components/overview/GetOnOffChart';
 import LocationDisplay from '../components/locationdisplay/LocationDisplay';
@@ -26,10 +28,11 @@ const DashBoardPage = () => {
     totalGb: 238.68,
     usedGb: 38.68,
     freeGb: 200,
-    usagePercentage: 0,
+    cpuUsage: 20,
     isStorageFull: false,
     cpuTemp: 36,
     gpsStatus: null,
+    uploadSpeed: 0,
   });
 
   const dataIds = useRef({});
@@ -48,11 +51,12 @@ const DashBoardPage = () => {
           totalGbId: config.realtime_configs[5],
           usedGbId: config.realtime_configs[6],
           freeGbId: config.realtime_configs[7],
-          usagePercentageId: config.realtime_configs[8],
+          cpuUsageId: config.realtime_configs[8],
           isStorageFullId: config.realtime_configs[9],
           cpuTempId: config.realtime_configs[10],
           gpsStatusId: config.realtime_configs[11],
           peoplePresentId: config.realtime_configs[12],
+          uploadSpeedId: config.realtime_configs[13],
         };
       },
       onValues: values => {
@@ -68,13 +72,13 @@ const DashBoardPage = () => {
           totalGb: values[dataIds.current.totalGbId?.id]?.value || 0,
           usedGb: values[dataIds.current.usedGbId?.id]?.value || 0,
           freeGb: values[dataIds.current.freeGbId?.id]?.value || 0,
-          usagePercentage:
-            values[dataIds.current.usagePercentageId?.id]?.value || 0,
+          cpuUsage: values[dataIds.current.cpuUsageId?.id]?.value || 0,
           isStorageFull: values[dataIds.current.isStorageFullId?.id] || false,
           cpuTemp: values[dataIds.current.cpuTempId?.id]?.value || 0,
           gpsStatus: values[dataIds.current.gpsStatusId?.id] || null,
           peoplePresent:
             values[dataIds.current.peoplePresentId?.id]?.value || 0,
+          uploadSpeed: values[dataIds.current.uploadSpeedId?.id]?.value || 0,
         }));
       },
     });
@@ -160,9 +164,9 @@ const DashBoardPage = () => {
             />
             <div className="grid grid-rows-2 gap-5">
               <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
-              <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
+              <UsageCpu cpuUsage={dashboardData.cpuUsage} />
             </div>
-            <CategoryDistributionChart />
+            <NetworkSpeed speed={dashboardData.uploadSpeed} />
           </div>
         </motion.div>
       </main>
