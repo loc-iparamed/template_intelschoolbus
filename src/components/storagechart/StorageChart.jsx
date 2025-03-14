@@ -8,7 +8,7 @@ import {
   Legend,
 } from 'recharts';
 
-const COLORS = ['#fc7fa0', '#5dd0fd'];
+const COLORS = [ '#6a5acd','#fc7fa0'];
 
 const StorageChart = ({totalGb, usedGb, freeGb}) => {
   const storageData = [
@@ -18,7 +18,7 @@ const StorageChart = ({totalGb, usedGb, freeGb}) => {
 
   return (
     <motion.div
-      className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-10 border border-gray-700"
+      className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-2 border border-gray-700 "
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       whileHover={{
@@ -27,20 +27,21 @@ const StorageChart = ({totalGb, usedGb, freeGb}) => {
         transition: {duration: 0.1},
       }}
       transition={{delay: 0.1}}>
-      <h2 className="text-2xl font-medium mb-4 text-gray-100">Storage Usage</h2>
-      <p className="text-gray-300 text-center mb-2 text-xl ">
+      <h2 className="text-3xl font-medium mb-4 text-gray-100 text-center">
+        Storage Usage
+      </h2>
+      <p className="text-gray-300 text-center mb-14 text-xl">
         Total Storage:{' '}
         <span className="text-white font-semibold">{totalGb} GB</span>
       </p>
-      <div className="h-80">
-        <ResponsiveContainer width={'100%'} height={'100%'}>
+      <div className="h-72 w-full flex justify-center items-center">
+        <ResponsiveContainer width="140%" height="140%">
           <PieChart>
             <Pie
               data={storageData}
-              cx={'50%'}
-              cy={'50%'}
-              labelLine={true}
-              outerRadius={130}
+              cx="50%"
+              cy="50%"
+              outerRadius={160}
               fill="#8884d8"
               dataKey="value"
               label={({name, percent}) =>

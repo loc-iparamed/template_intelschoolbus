@@ -1,7 +1,7 @@
 import {Users, ArrowBigUp, ArrowBigDown, MapPinned} from 'lucide-react';
 import {motion} from 'framer-motion';
-import eraWidget from '@eohjsc/era-widget';
-import {useEffect, useState, useRef} from 'react';
+import mqtt from 'mqtt';
+import {useEffect, useState} from 'react';
 import Header from '../components/common/Header';
 import SpeedometerComponent from '../components/speedometer/SpeedometerComponent';
 import StatCard from '../components/common/StatCard';
@@ -9,13 +9,37 @@ import StatCardCustom from '../components/common/StatCardCustom';
 import StorageChart from '../components/storagechart/StorageChart';
 import ThermalCpu from '../components/thermalcpu/ThermalCpu';
 import UsageCpu from '../components/UsageCpu/UsageCpu';
-import NetworkSpeed from '../components/networkspeed/NetworkSpeed';
 import PeoplePresentChart from '../components/people_present_chart/PeoplePresentChart';
-
 import MapComponent from '../components/map/MapComponent';
 import GetOnOffChart from '../components/overview/GetOnOffChart';
 import LocationDisplay from '../components/locationdisplay/LocationDisplay';
 import CapturePhoto from '../components/capturephoto/CapurePhoto';
+import NetworkSpeed from '../components/networkspeed/NetworkSpeed';
+
+const BROKER = 'wss://mqtt1.eoh.io:8084';
+const TOKEN = '37383e7d-6c71-453d-8996-389c19673b4e';
+
+const topics = {
+  latitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89602/value',
+  longitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89603/value',
+  speed: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89604/value',
+  peopleGetOn:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89605/value',
+  peopleGetOff:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89606/value',
+  totalGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89607/value',
+  usedGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89608/value',
+  freeGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89609/value',
+  cpuUsage: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89610/value',
+  isStorageFull:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89611/value',
+  cpuTemp: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89612/value',
+  gpsStatus: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89613/value',
+  peoplePresent:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/90122/value',
+  uploadSpeed:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
+};
 
 const DashBoardPage = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -32,56 +56,35 @@ const DashBoardPage = () => {
     isStorageFull: false,
     cpuTemp: 36,
     gpsStatus: null,
-    uploadSpeed: 0,
+    uploadSpeed: 20,
   });
 
-  const dataIds = useRef({});
-
   useEffect(() => {
-    eraWidget.init({
-      needRealtimeConfigs: true,
-      maxRealtimeConfigsCount: 14,
-      onConfiguration: config => {
-        dataIds.current = {
-          latitudeId: config.realtime_configs[0],
-          longitudeId: config.realtime_configs[1],
-          speedId: config.realtime_configs[2],
-          peopleGetOnId: config.realtime_configs[3],
-          peopleGetOffId: config.realtime_configs[4],
-          totalGbId: config.realtime_configs[5],
-          usedGbId: config.realtime_configs[6],
-          freeGbId: config.realtime_configs[7],
-          cpuUsageId: config.realtime_configs[8],
-          isStorageFullId: config.realtime_configs[9],
-          cpuTempId: config.realtime_configs[10],
-          gpsStatusId: config.realtime_configs[11],
-          peoplePresentId: config.realtime_configs[12],
-          uploadSpeedId: config.realtime_configs[13],
-        };
-      },
-      onValues: values => {
-        setDashboardData(prev => ({
-          ...prev,
-          peopleGetOn: values[dataIds.current.peopleGetOnId?.id]?.value || 0,
-          peopleGetOff: values[dataIds.current.peopleGetOffId?.id]?.value || 0,
-          speed: values[dataIds.current.speedId?.id]?.value || 0,
-          latitude:
-            values[dataIds.current.latitudeId?.id]?.value || prev.latitude,
-          longitude:
-            values[dataIds.current.longitudeId?.id]?.value || prev.longitude,
-          totalGb: values[dataIds.current.totalGbId?.id]?.value || 0,
-          usedGb: values[dataIds.current.usedGbId?.id]?.value || 0,
-          freeGb: values[dataIds.current.freeGbId?.id]?.value || 0,
-          cpuUsage: values[dataIds.current.cpuUsageId?.id]?.value || 0,
-          isStorageFull: values[dataIds.current.isStorageFullId?.id] || false,
-          cpuTemp: values[dataIds.current.cpuTempId?.id]?.value || 0,
-          gpsStatus: values[dataIds.current.gpsStatusId?.id] || null,
-          peoplePresent:
-            values[dataIds.current.peoplePresentId?.id]?.value || 0,
-          uploadSpeed: values[dataIds.current.uploadSpeedId?.id]?.value || 0,
-        }));
-      },
+    const client = mqtt.connect(BROKER, {
+      username: TOKEN,
+      password: TOKEN,
     });
+
+    client.on('connect', () => {
+      Object.values(topics).forEach(topic => {
+        client.subscribe(topic, err => {
+          if (err) console.error(`Subscribe error for ${topic}:`, err);
+        });
+      });
+    });
+
+    client.on('message', (topic, message) => {
+      const parsedMessage = JSON.parse(message.toString());
+      const value = parsedMessage?.v || 0;
+      setDashboardData(prev => ({
+        ...prev,
+        [Object.keys(topics).find(key => topics[key] === topic)]: value,
+      }));
+    });
+
+    return () => {
+      client.end();
+    };
   }, []);
 
   return (

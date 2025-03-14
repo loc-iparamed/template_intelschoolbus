@@ -68,8 +68,8 @@ const PeoplePresentChart = ({peoplePresent}) => {
       colors: ['#5dd0fd'],
     },
     markers: {
-      size: 2, // Marker tại điểm cuối
-      colors: ['gray'], // Màu marker
+      size: 2,
+      colors: ['gray'],
       strokeColors: 'white',
       strokeWidth: 3,
       shape: 'circle',
@@ -97,7 +97,7 @@ const PeoplePresentChart = ({peoplePresent}) => {
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         transition: {duration: 0.1},
       }}>
-      <h2 className="text-xl font-medium text-gray-100">People Present</h2>
+      <h2 className="text-2xl font-medium text-gray-100">People Present</h2>
       <div className="h-40 mb-7">
         <ReactApexChart
           options={options}

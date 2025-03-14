@@ -1,20 +1,13 @@
 import {motion} from 'framer-motion';
+import {Wifi} from 'lucide-react';
 import Speedometer, {
   Background,
   Arc,
-  Needle,
   Progress,
-  Marks,
   Indicator,
 } from 'react-speedometer';
 
 const NetworkSpeed = ({speed}) => {
-  const getMarkColor = value => {
-    if (value < 40) return '#15ffbf';
-    if (value < 80) return '#ddff00';
-    return '#ff3200';
-  };
-
   return (
     <motion.div
       className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-4 border border-gray-700 w-full flex flex-col items-center"
@@ -26,61 +19,39 @@ const NetworkSpeed = ({speed}) => {
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       transition={{delay: 0.1}}>
-      <h2 className="text-2xl font-medium text-gray-100 mb-6 p-3">
-        Speedometer
+      <h2 className="text-3xl font-medium text-gray-100 mb-6 p-3">
+        Network Speed
       </h2>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center relative">
         <Speedometer
           value={speed}
-          max={110}
+          max={30}
           accentColor="grey"
-          angle={240}
-          width={370}
+          angle={180}
+          width={600}
           height={380}
           fontFamily="squada-one">
-          <Background angle={360} color="#141526" opacity={0.4} />
-          <Arc arcWidth={4} />
-          <Needle baseOffset={40} circleRadius={20} offset={70} />
-          <Progress arcWidth={10} />
-          <Marks step={10} fontSize={18} lineSize={18} numbersRadius={30}>
-            {mark => (
-              <>
-                <line
-                  x1={mark.coordinates.x1}
-                  y1={mark.coordinates.y1}
-                  x2={mark.coordinates.x2}
-                  y2={mark.coordinates.y2}
-                  stroke={getMarkColor(mark.value)}
-                  strokeWidth={mark.isEven ? 3 : 2}
-                  strokeLinecap="round"
-                />
-
-                <text
-                  {...mark.textProps}
-                  fontSize={23}
-                  fill={getMarkColor(mark.value)}
-                  fontWeight="bold"
-                  textAnchor="middle">
-                  {mark.value}
-                </text>
-              </>
-            )}
-          </Marks>
+          <Background angle={180} color="white" opacity={0.3} />
+          <Arc arcWidth={10} />
+          <Progress arcWidth={15} color="#9dfa8b" />
           <Indicator>
             {(value, textProps) => (
               <text
                 {...textProps}
-                fontSize={45}
+                fontSize={70}
                 fill="white"
-                x={185}
-                y={280}
+                x={310}
+                y={230}
                 textAnchor="middle"
                 fontFamily="squada-one">
-                {value} km/h
+                {value} Mbps
               </text>
             )}
           </Indicator>
         </Speedometer>
+        <div className="absolute top-[25%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-white">
+          <Wifi size={100} strokeWidth={2} />
+        </div>
       </div>
     </motion.div>
   );

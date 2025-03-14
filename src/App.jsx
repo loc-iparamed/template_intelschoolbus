@@ -1,5 +1,5 @@
 import {useRoutes} from 'react-router-dom';
-import Sidebar from './components/common/Sidebar';
+// import Sidebar from './components/common/Sidebar';
 import 'leaflet/dist/leaflet.css';
 import DashBoardPage from './pages/DashboardPage';
 import PresentsPage from './pages/ViewPage';
@@ -29,12 +29,11 @@ function App() {
 
   return (
     <div className="flex h-screen bg-gray-900 text-gray-100 overflow-hidden">
-      {/* Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] opacity-95" />
         <div className="absolute inset-0 backdrop-blur-lg bg-[radial-gradient(circle_at_top_left,#38BDF8_0%,#1E293B_70%)] opacity-80" />
       </div>
-      <Sidebar />
+      {/* <Sidebar /> */}
       {routing}
     </div>
   );

@@ -29,7 +29,7 @@ const GetOnOffChart = ({peopleGetOn, peopleGetOff}) => {
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         transition: {duration: 0.1},
       }}>
-      <h2 className="text-xl font-medium text-gray-200">Get On Off</h2>
+      <h2 className="text-2xl font-medium text-gray-200">Get On Off</h2>
       <div className="h-40 mt-9 ml-[-30px] mr-5">
         <ResponsiveContainer >
           <BarChart data={GET_ON_OFF_DATA} barCategoryGap={10}>

@@ -26,7 +26,7 @@ const SpeedometerComponent = ({speed}) => {
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       transition={{delay: 0.1}}>
-      <h2 className="text-2xl font-medium text-gray-100 mb-6 p-3">
+      <h2 className="text-3xl font-medium text-gray-100 mb-6 p-3">
         Speedometer
       </h2>
       <div className="w-full flex justify-center">
@@ -35,7 +35,7 @@ const SpeedometerComponent = ({speed}) => {
           max={110}
           accentColor="grey"
           angle={240}
-          width={370}
+          width={380}
           height={380}
           fontFamily="squada-one">
           <Background angle={360} color="#141526" opacity={0.4} />

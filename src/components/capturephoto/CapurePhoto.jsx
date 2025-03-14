@@ -48,7 +48,7 @@ const CapturePhoto = ({peoplePresent}) => {
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         transition: {duration: 0.1},
       }}>
-      <h2 className="text-xl font-medium text-gray-100 mt-2 ml-2">
+      <h2 className="text-3xl font-medium text-gray-100 mt-2 ml-2">
         Capture Photo
       </h2>
       <div className="h-96 w-full flex justify-center items-center mt-8">

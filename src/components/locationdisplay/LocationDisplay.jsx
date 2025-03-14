@@ -7,7 +7,7 @@ const LocationDisplay = ({name, icon: Icon, value, color}) => {
     <motion.div
       className="bg-gray-800 bg-opacity-60 backdrop-blur-md shadow-lg rounded-xl border border-gray-700 p-10 min-h-[500px] flex flex-col justify-between"
       whileHover={{y: -5, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'}}>
-      <div className="flex items-center justify-center text-2xl font-medium text-gray-200">
+      <div className="flex items-center justify-center text-3xl font-medium text-gray-200">
         <Icon size={36} className="mr-2" style={{color}} />
         {name}
       </div>

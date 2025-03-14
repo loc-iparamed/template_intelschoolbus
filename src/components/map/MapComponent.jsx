@@ -90,7 +90,7 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
       animate={{opacity: 1, y: 0}}
       transition={{delay: 0.1}}>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-medium text-gray-100">Live Bus Map</h2>
+        <h2 className="text-3xl font-medium text-gray-100">Live Bus Map</h2>
         <div className="flex space-x-2 items-center">
           <button
             onClick={focusCurrentLocation}

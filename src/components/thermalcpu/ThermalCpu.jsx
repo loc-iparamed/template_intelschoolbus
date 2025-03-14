@@ -3,7 +3,7 @@ import {motion} from 'framer-motion';
 
 const ThermalCpu = ({cpuTemp}) => {
   const getTempColor = temp => {
-    if (temp < 65) return '#10B981';
+    if (temp < 65) return '#ffa500';
     if (temp < 80) return '#FACC15';
     return '#EF4444';
   };
