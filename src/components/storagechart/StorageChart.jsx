@@ -10,7 +10,7 @@ import {
 import {HardDrive, Database} from 'lucide-react';
 
 const StorageChart = ({totalGb, usedGb, freeGb}) => {
-  const COLORS = ['#6a5acd', '#15ffbf'];
+  const COLORS = ['#ff8c19', '#00a4b2'];
 
   const storageData = [
     {name: 'Used', value: usedGb},
@@ -44,8 +44,8 @@ const StorageChart = ({totalGb, usedGb, freeGb}) => {
 
       <div className="flex items-center justify-between w-full mb-2">
         <div className="flex items-center">
-          <HardDrive className="h-5 w-5 mr-2 text-purple-400" />
-          <h2 className="text-xl font-medium text-gray-200">Storage Usage</h2>
+          <HardDrive className="h-5 w-5 mr-2 text-violet-300" />
+          <h2 className="text-2xl font-medium text-gray-200">Storage Usage</h2>
         </div>
         <div
           className="px-2 py-1 bg-gray-700/50 rounded-md text-base"
@@ -116,7 +116,7 @@ const StorageChart = ({totalGb, usedGb, freeGb}) => {
 
       <div className="grid grid-cols-2 gap-4 mt-14">
         <div className="bg-gray-700/30 rounded-lg p-3 flex items-center">
-          <Database className="h-4 w-4 mr-2 text-purple-400" />
+          <Database className="h-5 w-5 mr-2 text-violet-300" />
           <div>
             <div className="text-base text-gray-400">Used Space</div>
             <div className="text-lg font-medium text-white">
@@ -125,7 +125,7 @@ const StorageChart = ({totalGb, usedGb, freeGb}) => {
           </div>
         </div>
         <div className="bg-gray-700/30 rounded-lg p-3 flex items-center">
-          <Database className="h-4 w-4 mr-2 text-green-400" />
+          <Database className="h-5 w-5 mr-2 text-green-400" />
           <div>
             <div className="text-base text-gray-400">Free Space</div>
             <div className="text-lg font-medium text-white">

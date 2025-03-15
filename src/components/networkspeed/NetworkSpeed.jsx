@@ -27,7 +27,6 @@ const NetworkSpeed = ({speed}) => {
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       transition={{delay: 0.1}}>
-      {/* Decorative elements */}
       <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
 
@@ -39,7 +38,7 @@ const NetworkSpeed = ({speed}) => {
         </div>
       </div>
 
-      <div className="w-full h-200 flex justify-center relative mt-8">
+      <div className="w-full h-200 flex justify-center relative mt-10">
         <Speedometer
           value={speed}
           max={30}
@@ -93,12 +92,11 @@ const NetworkSpeed = ({speed}) => {
         </Speedometer>
 
         <div className="absolute top-[25%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-white opacity-20">
-          <Wifi size={80} strokeWidth={1.5} />
+          <Wifi size={90} strokeWidth={1.5} color="white" />
         </div>
       </div>
 
-      {/* Network stats */}
-      <div className="grid grid-cols-3 gap-4 w-full mt-8">
+      <div className="grid grid-cols-3 gap-4 w-full mt-12">
         <div className="bg-gray-700/30 rounded-lg p-2 text-center">
           <div className="text-base text-gray-400">Latency</div>
           <div className="text-lg font-medium text-white">
