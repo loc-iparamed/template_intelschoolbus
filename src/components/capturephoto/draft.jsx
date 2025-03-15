@@ -7,6 +7,7 @@ import {
   Users,
   ChevronLeft,
   ChevronRight,
+
   RefreshCw,
   AlertCircle,
 } from 'lucide-react';
@@ -137,10 +138,10 @@ const CapturePhoto = ({peoplePresent}) => {
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
             <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center mr-3">
-              <Camera className="h-6 w-6 text-purple-400" />
+              <Camera className="h-5 w-5 text-purple-400" />
             </div>
             <div>
-              <h2 className="text-2xl font-medium text-gray-200">Capture Photo</h2>
+              <h2 className="text-xl font-medium text-gray-200">Camera Feed</h2>
               {lastUpdated && (
                 <div className="flex items-center mt-1 text-xs text-gray-400">
                   <Clock className="h-3 w-3 mr-1" />
@@ -176,11 +177,11 @@ const CapturePhoto = ({peoplePresent}) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
           <div className="bg-gray-700/30 rounded-lg p-3 flex items-center justify-between">
             <div className="flex items-center">
-              <Users className="h-5 w-5 mr-2 text-pink-400" />
-              <span className="text-sm text-gray-400">People Present</span>
+              <Users className="h-4 w-4 mr-2 text-pink-400" />
+              <span className="text-xs text-gray-400">People Present</span>
             </div>
             <div
-              className={`text-base font-medium px-2 py-0.5 rounded-full ${
+              className={`text-sm font-medium px-2 py-0.5 rounded-full ${
                 peoplePresent > 0
                   ? 'bg-green-900/30 text-green-400'
                   : 'bg-gray-700/50 text-gray-400'
@@ -191,10 +192,10 @@ const CapturePhoto = ({peoplePresent}) => {
 
           <div className="bg-gray-700/30 rounded-lg p-3 flex items-center justify-between">
             <div className="flex items-center">
-              <Camera className="h-5 w-5 mr-2 text-purple-400" />
-              <span className="text-sm text-gray-400">Photos Available</span>
+              <Camera className="h-4 w-4 mr-2 text-purple-400" />
+              <span className="text-xs text-gray-400">Photos Available</span>
             </div>
-            <div className="text-base font-medium text-white">
+            <div className="text-sm font-medium text-white">
               {allPhotos.length > 0 ? (
                 <span>
                   {currentPhotoIndex + 1} of {allPhotos.length}
@@ -249,7 +250,7 @@ const CapturePhoto = ({peoplePresent}) => {
                 animate={{opacity: 1}}
                 exit={{opacity: 0}}
                 transition={{duration: 0.3}}
-                className="w-full h-80 max-h-80 flex items-center justify-center">
+                className="w-full h-full flex items-center justify-center">
                 <img
                   src={photoUrl || '/placeholder.svg'}
                   alt="Captured"
@@ -259,6 +260,7 @@ const CapturePhoto = ({peoplePresent}) => {
             </AnimatePresence>
           )}
 
+          {/* Navigation arrows */}
           {allPhotos.length > 1 && photoUrl && (
             <>
               <motion.button
@@ -287,18 +289,18 @@ const CapturePhoto = ({peoplePresent}) => {
               className={`h-2 w-2 rounded-full ${
                 peoplePresent > 0 ? 'bg-green-400 animate-pulse' : 'bg-gray-500'
               } mr-2`}></div>
-            <span className="text-sm text-gray-400">
+            <span className="text-xs text-gray-400">
               {peoplePresent > 0
                 ? 'Live monitoring active'
                 : 'Waiting for detection'}
             </span>
           </div>
 
-          {/* {allPhotos.length > 0 && (
+          {allPhotos.length > 0 && (
             <div className="text-xs text-gray-400">
               {allPhotos[currentPhotoIndex]?.date?.toLocaleTimeString() || ''}
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </motion.div>

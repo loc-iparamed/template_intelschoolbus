@@ -2,7 +2,7 @@ import {Users, ArrowBigUp, ArrowBigDown, MapPinned} from 'lucide-react';
 import {motion} from 'framer-motion';
 import mqtt from 'mqtt';
 import {useEffect, useState} from 'react';
-import Header from '../components/common/Header';
+// import Header from '../components/common/Header';
 import SpeedometerComponent from '../components/speedometer/SpeedometerComponent';
 import StatCard from '../components/common/StatCard';
 import StatCardCustom from '../components/common/StatCardCustom';
@@ -89,10 +89,10 @@ const DashBoardPage = () => {
 
   return (
     <div className="flex-1 overflow-auto relative z-10">
-      <Header title="MaixCam Dashboard" />
+      {/* <Header title="MaixCam Dashboard" /> */}
       <main className="max-w-8xl mx-auto py-8 px-4 lg:px-8">
         <motion.div
-          className="grid grid-cols-3 gap-5 mb-8"
+          className="grid grid-cols-3 gap-5 mb-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
@@ -132,7 +132,7 @@ const DashBoardPage = () => {
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               <LocationDisplay
                 name="GPS Location"
@@ -141,6 +141,7 @@ const DashBoardPage = () => {
                   latitude: dashboardData.latitude,
                   longitude: dashboardData.longitude,
                   gpsStatus: dashboardData.gpsStatus,
+                  speed: dashboardData.speed,
                 }}
                 color="#60a5fa"
               />
@@ -155,7 +156,7 @@ const DashBoardPage = () => {
         </motion.div>
 
         <motion.div
-          className="mt-8"
+          className="mt-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
@@ -165,7 +166,7 @@ const DashBoardPage = () => {
               usedGb={dashboardData.usedGb}
               freeGb={dashboardData.freeGb}
             />
-            <div className="grid grid-rows-2 gap-5">
+            <div className="grid grid-rows-2 gap-3">
               <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
               <UsageCpu cpuUsage={dashboardData.cpuUsage} />
             </div>

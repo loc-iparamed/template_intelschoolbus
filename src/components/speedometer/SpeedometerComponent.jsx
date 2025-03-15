@@ -17,7 +17,7 @@ const SpeedometerComponent = ({speed}) => {
 
   return (
     <motion.div
-      className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-4 border border-gray-700 w-full flex flex-col items-center"
+      className="bg-gray-800/70 backdrop-blur-md shadow-xl rounded-xl p-4 border border-gray-700/50 w-full flex flex-col items-center relative overflow-hidden"
       whileHover={{
         y: -5,
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
@@ -26,22 +26,36 @@ const SpeedometerComponent = ({speed}) => {
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       transition={{delay: 0.1}}>
-      <h2 className="text-3xl font-medium text-gray-100 mb-6 p-3">
-        Speedometer
-      </h2>
-      <div className="w-full flex justify-center">
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
+
+      <div className="flex items-center justify-between w-full mb-4">
+        <h2 className="text-xl font-medium text-gray-100">Speedometer</h2>
+        <div className="px-2 py-1 bg-gray-700/50 rounded-md text-xs text-gray-300">
+          LIVE
+        </div>
+      </div>
+
+      <div className="w-full h-19 flex justify-center">
         <Speedometer
           value={speed}
           max={110}
           accentColor="grey"
-          angle={240}
-          width={380}
-          height={380}
-          fontFamily="squada-one">
-          <Background angle={360} color="#141526" opacity={0.4} />
-          <Arc arcWidth={4} />
-          <Needle baseOffset={40} circleRadius={20} offset={70} />
-          <Progress arcWidth={10} />
+          angle={250}
+          width={360}
+          height={360}
+          fontFamily="Inter, sans-serif">
+          <Background angle={360} color="#141526" opacity={0.2} />
+          <Arc arcWidth={4} color="#2a2a3c" />
+          <Needle
+            baseOffset={40}
+            circleRadius={15}
+            offset={60}
+            color="#ffffff"
+            baseColor="#15ffbf"
+            circleColor="#15ffbf"
+          />
+          <Progress arcWidth={12} color={'white'} opacity={0.5} />
           <Marks step={10} fontSize={18} lineSize={18} numbersRadius={30}>
             {mark => (
               <>
@@ -57,7 +71,7 @@ const SpeedometerComponent = ({speed}) => {
 
                 <text
                   {...mark.textProps}
-                  fontSize={23}
+                  fontSize={18}
                   fill={getMarkColor(mark.value)}
                   fontWeight="bold"
                   textAnchor="middle">
@@ -68,16 +82,30 @@ const SpeedometerComponent = ({speed}) => {
           </Marks>
           <Indicator>
             {(value, textProps) => (
-              <text
-                {...textProps}
-                fontSize={45}
-                fill="white"
-                x={185}
-                y={280}
-                textAnchor="middle"
-                fontFamily="squada-one">
-                {value} km/h
-              </text>
+              <>
+                <text
+                  {...textProps}
+                  fontSize={45}
+                  fill="white"
+                  x={180}
+                  y={280}
+                  textAnchor="middle"
+                  fontFamily="Inter, sans-serif"
+                  fontWeight="bold">
+                  {value}
+                </text>
+                <text
+                  {...textProps}
+                  fontSize={20}
+                  fill="white"
+                  x={180}
+                  y={305}
+                  textAnchor="middle"
+                  fontFamily="Inter, sans-serif"
+                  opacity={0.7}>
+                  km/h
+                </text>
+              </>
             )}
           </Indicator>
         </Speedometer>

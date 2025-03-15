@@ -1,5 +1,5 @@
 import {useRoutes} from 'react-router-dom';
-// import Sidebar from './components/common/Sidebar';
+import Sidebar from './components/common/Sidebar';
 import 'leaflet/dist/leaflet.css';
 import DashBoardPage from './pages/DashboardPage';
 import PresentsPage from './pages/ViewPage';
