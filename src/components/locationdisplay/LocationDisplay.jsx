@@ -3,8 +3,7 @@ import {Map, Navigation, Globe, Gauge} from 'lucide-react';
 
 const LocationDisplay = ({name, icon: Icon, value, color}) => {
   const {latitude, longitude, gpsStatus, speed} = value;
-
-  const isGpsActive = gpsStatus?.value === 'OK';
+  const isGpsActive = gpsStatus === 'OK';
 
   return (
     <motion.div
@@ -67,7 +66,9 @@ const LocationDisplay = ({name, icon: Icon, value, color}) => {
           </div>
           <div className="flex items-center">
             <Gauge className="h-6 w-6 mr-2 text-orange-400" />
-            <span className="text-2xl font-semibold text-white">{speed} km/h</span>
+            <span className="text-2xl font-semibold text-white">
+              {speed} km/h
+            </span>
           </div>
         </div>
       </div>
