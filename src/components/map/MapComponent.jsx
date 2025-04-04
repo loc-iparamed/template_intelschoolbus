@@ -1,12 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import L from 'leaflet';
 import {motion} from 'framer-motion';
-import {
-  Locate,
-  RotateCw,
-  MapPin,
-  Clock,
-} from 'lucide-react';
+import {Locate, RotateCw, MapPin, Clock} from 'lucide-react';
 
 // Thêm CSS cho Leaflet popup vào file CSS toàn cục hoặc sử dụng useEffect để thêm style
 const leafletPopupStyles = `
@@ -46,18 +41,23 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
     popupAnchor: [0, -25],
   });
 
-  // Thêm styles cho Leaflet popup
   useEffect(() => {
+    let styleElement = null; // Create a local variable to hold the style element
+
     if (!styleSheetRef.current) {
       const style = document.createElement('style');
       style.textContent = leafletPopupStyles;
       document.head.appendChild(style);
       styleSheetRef.current = style;
+      styleElement = style; // Assign the created element to the local variable
+    } else {
+      styleElement = styleSheetRef.current; // If it already exists, use the ref
     }
 
     return () => {
-      if (styleSheetRef.current) {
-        document.head.removeChild(styleSheetRef.current);
+      if (styleElement && document.head.contains(styleElement)) {
+        document.head.removeChild(styleElement);
+        styleSheetRef.current = null; // Optionally reset the ref after removal
       }
     };
   }, []);
@@ -101,13 +101,11 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
 
   useEffect(() => {
     if (!mapRef.current) {
-      // Initialize map
       mapRef.current = L.map('map', {
-        zoomControl: false, // We'll add custom zoom controls
-        attributionControl: false, // Hide attribution for cleaner look
+        zoomControl: false,
+        attributionControl: false,
       }).setView([latitude || 10.784239, longitude || 106.6403606], zoom);
 
-      // Sử dụng tile layer sáng hơn thay vì dark theme
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors',
@@ -189,21 +187,19 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
           );
       }
 
-      // Update or create path polyline
       if (polylineRef.current) {
         polylineRef.current.setLatLngs(pathRef.current);
       } else if (pathRef.current.length > 1) {
         polylineRef.current = L.polyline(pathRef.current, {
-          color: '#3B82F6', // Blue color
+          color: '#3B82F6',
           weight: 4,
           opacity: 0.8,
           lineCap: 'round',
           lineJoin: 'round',
-          dashArray: '0, 10', // Creates a dashed effect
-          dashOffset: '0', // Starting point of the dash pattern
+          dashArray: '0, 10',
+          dashOffset: '0',
         }).addTo(mapRef.current);
 
-        // Animate the dash
         let offset = 0;
         setInterval(() => {
           offset = (offset + 1) % 10;
@@ -213,9 +209,9 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
         }, 100);
       }
 
-      // Center map on current position
       mapRef.current.panTo([latitude, longitude], {animate: true, duration: 1});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latitude, longitude, speed, zoom]);
 
   const clearPath = () => {
@@ -286,7 +282,6 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
             <button
               onClick={e => {
                 e.stopPropagation();
-                console.log('Clear path clicked');
                 clearPath();
               }}
               className="bg-red-500/20 text-red-400 h-10 w-10 flex items-center justify-center rounded-lg transition-colors hover:bg-red-500/30"
