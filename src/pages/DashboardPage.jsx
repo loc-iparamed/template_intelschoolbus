@@ -1,19 +1,45 @@
 import {Users, ArrowBigUp, ArrowBigDown, MapPinned} from 'lucide-react';
 import {motion} from 'framer-motion';
-import eraWidget from '@eohjsc/era-widget';
-import {useEffect, useState, useRef} from 'react';
-import Header from '../components/common/Header';
+import mqtt from 'mqtt';
+import {useEffect, useState} from 'react';
+// import Header from '../components/common/Header';
 import SpeedometerComponent from '../components/speedometer/SpeedometerComponent';
 import StatCard from '../components/common/StatCard';
 import StatCardCustom from '../components/common/StatCardCustom';
 import StorageChart from '../components/storagechart/StorageChart';
 import ThermalCpu from '../components/thermalcpu/ThermalCpu';
+import UsageCpu from '../components/UsageCpu/UsageCpu';
 import PeoplePresentChart from '../components/people_present_chart/PeoplePresentChart';
-import CategoryDistributionChart from '../components/overview/CategoryDistributionChart';
 import MapComponent from '../components/map/MapComponent';
 import GetOnOffChart from '../components/overview/GetOnOffChart';
 import LocationDisplay from '../components/locationdisplay/LocationDisplay';
 import CapturePhoto from '../components/capturephoto/CapurePhoto';
+import NetworkSpeed from '../components/networkspeed/NetworkSpeed';
+
+const BROKER = 'wss://mqtt1.eoh.io:8084';
+const TOKEN = '37383e7d-6c71-453d-8996-389c19673b4e';
+
+const topics = {
+  latitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89602/value',
+  longitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89603/value',
+  speed: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89604/value',
+  peopleGetOn:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89605/value',
+  peopleGetOff:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89606/value',
+  totalGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89607/value',
+  usedGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89608/value',
+  freeGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89609/value',
+  cpuUsage: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89610/value',
+  isStorageFull:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89611/value',
+  cpuTemp: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89612/value',
+  gpsStatus: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89613/value',
+  peoplePresent:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/90122/value',
+  uploadSpeed:
+    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
+};
 
 const DashBoardPage = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -26,66 +52,47 @@ const DashBoardPage = () => {
     totalGb: 238.68,
     usedGb: 38.68,
     freeGb: 200,
-    usagePercentage: 0,
+    cpuUsage: 20,
     isStorageFull: false,
     cpuTemp: 36,
     gpsStatus: null,
+    uploadSpeed: 20,
   });
 
-  const dataIds = useRef({});
-
   useEffect(() => {
-    eraWidget.init({
-      needRealtimeConfigs: true,
-      maxRealtimeConfigsCount: 14,
-      onConfiguration: config => {
-        dataIds.current = {
-          latitudeId: config.realtime_configs[0],
-          longitudeId: config.realtime_configs[1],
-          speedId: config.realtime_configs[2],
-          peopleGetOnId: config.realtime_configs[3],
-          peopleGetOffId: config.realtime_configs[4],
-          totalGbId: config.realtime_configs[5],
-          usedGbId: config.realtime_configs[6],
-          freeGbId: config.realtime_configs[7],
-          usagePercentageId: config.realtime_configs[8],
-          isStorageFullId: config.realtime_configs[9],
-          cpuTempId: config.realtime_configs[10],
-          gpsStatusId: config.realtime_configs[11],
-          peoplePresentId: config.realtime_configs[12],
-        };
-      },
-      onValues: values => {
-        setDashboardData(prev => ({
-          ...prev,
-          peopleGetOn: values[dataIds.current.peopleGetOnId?.id]?.value || 0,
-          peopleGetOff: values[dataIds.current.peopleGetOffId?.id]?.value || 0,
-          speed: values[dataIds.current.speedId?.id]?.value || 0,
-          latitude:
-            values[dataIds.current.latitudeId?.id]?.value || prev.latitude,
-          longitude:
-            values[dataIds.current.longitudeId?.id]?.value || prev.longitude,
-          totalGb: values[dataIds.current.totalGbId?.id]?.value || 0,
-          usedGb: values[dataIds.current.usedGbId?.id]?.value || 0,
-          freeGb: values[dataIds.current.freeGbId?.id]?.value || 0,
-          usagePercentage:
-            values[dataIds.current.usagePercentageId?.id]?.value || 0,
-          isStorageFull: values[dataIds.current.isStorageFullId?.id] || false,
-          cpuTemp: values[dataIds.current.cpuTempId?.id]?.value || 0,
-          gpsStatus: values[dataIds.current.gpsStatusId?.id] || null,
-          peoplePresent:
-            values[dataIds.current.peoplePresentId?.id]?.value || 0,
-        }));
-      },
+    const client = mqtt.connect(BROKER, {
+      username: TOKEN,
+      password: TOKEN,
     });
+
+    client.on('connect', () => {
+      Object.values(topics).forEach(topic => {
+        client.subscribe(topic, err => {
+          if (err) console.error(`Subscribe error for ${topic}:`, err);
+        });
+      });
+    });
+
+    client.on('message', (topic, message) => {
+      const parsedMessage = JSON.parse(message.toString());
+      const value = parsedMessage?.v || 0;
+      setDashboardData(prev => ({
+        ...prev,
+        [Object.keys(topics).find(key => topics[key] === topic)]: value,
+      }));
+    });
+
+    return () => {
+      client.end();
+    };
   }, []);
 
   return (
     <div className="flex-1 overflow-auto relative z-10">
-      <Header title="MaixCam Dashboard" />
+      {/* <Header title="MaixCam Dashboard" /> */}
       <main className="max-w-8xl mx-auto py-8 px-4 lg:px-8">
         <motion.div
-          className="grid grid-cols-3 gap-5 mb-8"
+          className="grid grid-cols-3 gap-5 mb-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
@@ -125,7 +132,7 @@ const DashBoardPage = () => {
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               <LocationDisplay
                 name="GPS Location"
@@ -134,6 +141,7 @@ const DashBoardPage = () => {
                   latitude: dashboardData.latitude,
                   longitude: dashboardData.longitude,
                   gpsStatus: dashboardData.gpsStatus,
+                  speed: dashboardData.speed,
                 }}
                 color="#60a5fa"
               />
@@ -148,7 +156,7 @@ const DashBoardPage = () => {
         </motion.div>
 
         <motion.div
-          className="mt-8"
+          className="mt-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
@@ -158,11 +166,11 @@ const DashBoardPage = () => {
               usedGb={dashboardData.usedGb}
               freeGb={dashboardData.freeGb}
             />
-            <div className="grid grid-rows-2 gap-5">
+            <div className="grid grid-rows-2 gap-3">
               <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
-              <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
+              <UsageCpu cpuUsage={dashboardData.cpuUsage} />
             </div>
-            <CategoryDistributionChart />
+            <NetworkSpeed speed={dashboardData.uploadSpeed} />
           </div>
         </motion.div>
       </main>
