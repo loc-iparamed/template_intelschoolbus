@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Hook điều hướng
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();

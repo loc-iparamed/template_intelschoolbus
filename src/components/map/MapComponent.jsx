@@ -49,7 +49,7 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
       style.textContent = leafletPopupStyles;
       document.head.appendChild(style);
       styleSheetRef.current = style;
-      styleElement = style; // Assign the created element to the local variable
+      styleElement = style;
     } else {
       styleElement = styleSheetRef.current; // If it already exists, use the ref
     }

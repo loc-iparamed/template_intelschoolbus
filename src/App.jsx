@@ -2,8 +2,10 @@ import {useRoutes} from 'react-router-dom';
 import Sidebar from './components/common/Sidebar';
 import 'leaflet/dist/leaflet.css';
 import DashBoardPage from './pages/DashboardPage';
-import PresentsPage from './pages/ViewPage';
+import PresentsPage from './pages/PresentsPage';
 import LoginPage from './pages/LoginPage';
+import TrackingPage from './pages/TrackingPage';
+import DeviceInfoPage from './pages/DeviceInfoPage';
 // import UsersPage from './pages/UsersPage';
 import PeoplePresentChart from './components/people_present_chart/PeoplePresentChart';
 // import OrdersPage from './pages/OrdersPage';
@@ -13,8 +15,11 @@ import SettingsPage from './pages/SettingsPage';
 const routes = [
   {path: '/', element: <DashBoardPage />},
   {path: '/presents', element: <PresentsPage />},
-  {path: '/users', element: <SettingsPage />},
+  {path: '/tracking', element: <TrackingPage />},
+  {path: '/deviceinfo', element: <DeviceInfoPage />},
   {path: '/view', element: <PeoplePresentChart />},
+  {path: '/users', element: <SettingsPage />},
+
   // {path: '/orders', element: <OrdersPage />},
   // {path: '/analytics', element: <AnalyticsPage />},
   {path: '/settings', element: <LoginPage />},

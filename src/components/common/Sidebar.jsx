@@ -1,7 +1,7 @@
 import {
   MonitorIcon as MonitorCog,
   Cpu,
-  Users,
+  // Users,
   Cctv,
   MapPinned,
   Settings,
@@ -19,10 +19,10 @@ const BASE_PATH = '/template_intelschoolbus';
 
 const SIDEBAR_ITEMS = [
   {name: 'Dashboard', icon: MonitorCog, color: '#3B82F6', href: '/'},
-  {name: 'Camera', icon: Cctv, color: '#10B981', href: '/view'},
-  {name: 'GPS Tracker', icon: MapPinned, color: '#8B5CF6', href: '/gps'},
-  {name: 'Device Manager', icon: HardDrive, color: '#F59E0B', href: '/device'},
-  {name: 'Users', icon: Users, color: '#EC4899', href: '/users'},
+  {name: 'Camera', icon: Cctv, color: '#10B981', href: '/presents'},
+  {name: 'GPS Tracker', icon: MapPinned, color: '#8B5CF6', href: '/tracking'},
+  {name: 'Device Manager', icon: HardDrive, color: '#F59E0B', href: '/deviceinfo'},
+  // {name: 'Users', icon: Users, color: '#EC4899', href: '/users'},
   {name: 'Settings', icon: Settings, color: '#6EE7B7', href: '/settings'},
 ];
 
