@@ -43,9 +43,9 @@ const topics = {
 
 const DashBoardPage = () => {
   const [dashboardData, setDashboardData] = useState({
-    peopleGetOn: 4,
-    peopleGetOff: 2,
-    peoplePresent: 0,
+    peopleGetOn: 25,
+    peopleGetOff: 16,
+    peoplePresent: 9,
     latitude: 10.784239,
     longitude: 106.6403606,
     speed: 45,
