@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import {useState, memo, useEffect} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 const BASE_PATH = '/template_intelschoolbus';
 
@@ -21,7 +21,12 @@ const SIDEBAR_ITEMS = [
   {name: 'Dashboard', icon: MonitorCog, color: '#3B82F6', href: '/'},
   {name: 'Camera', icon: Cctv, color: '#10B981', href: '/presents'},
   {name: 'GPS Tracker', icon: MapPinned, color: '#8B5CF6', href: '/tracking'},
-  {name: 'Device Manager', icon: HardDrive, color: '#F59E0B', href: '/deviceinfo'},
+  {
+    name: 'Device Manager',
+    icon: HardDrive,
+    color: '#F59E0B',
+    href: '/deviceinfo',
+  },
   // {name: 'Users', icon: Users, color: '#EC4899', href: '/users'},
   {name: 'Settings', icon: Settings, color: '#6EE7B7', href: '/settings'},
 ];
@@ -29,6 +34,7 @@ const SIDEBAR_ITEMS = [
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -46,6 +52,12 @@ const Sidebar = () => {
       window.removeEventListener('resize', checkMobile);
     };
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    navigate(`${BASE_PATH}/login`);
+  };
 
   return (
     <>
@@ -84,7 +96,7 @@ const Sidebar = () => {
                   initial={{opacity: 0, x: -20}}
                   animate={{opacity: 1, x: 0}}
                   transition={{duration: 0.3}}>
-                  EduBusMonitor
+                  EduSafeGuard
                 </motion.h2>
               )}
             </motion.div>
@@ -157,7 +169,6 @@ const Sidebar = () => {
             {/* Divider */}
             <div className="my-6 border-t border-gray-700/30" />
 
-            {/* Help and Logout */}
             <div className="space-y-1">
               <motion.div
                 className="flex items-center p-3 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/40 transition-all duration-200 cursor-pointer"
@@ -181,15 +192,16 @@ const Sidebar = () => {
                 </AnimatePresence>
               </motion.div>
 
-              <motion.div
-                className="flex items-center p-3 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/40 transition-all duration-200 cursor-pointer"
-                whileHover={{x: 4}}
-                whileTap={{scale: 0.98}}>
-                <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-gray-700/30">
-                  <LogOut size={18} className="text-gray-400" />
-                </div>
-
-                <AnimatePresence>
+              <AnimatePresence>
+                <motion.button
+                  onClick={handleLogout}
+                  className="flex items-center w-full px-5 py-2 text-sm font-medium rounded-lg text-red-400 hover:text-white hover:bg-gray-700/40 transition-all duration-200"
+                  whileHover={{x: 4}}
+                  whileTap={{scale: 0.98}}
+                  initial={{opacity: 0, x: -10}}
+                  animate={{opacity: 1, x: 0}}
+                  exit={{opacity: 0, x: -10}}>
+                  <LogOut size={20} />
                   {isSidebarOpen && (
                     <motion.span
                       className="ml-3"
@@ -200,8 +212,8 @@ const Sidebar = () => {
                       Logout
                     </motion.span>
                   )}
-                </AnimatePresence>
-              </motion.div>
+                </motion.button>
+              </AnimatePresence>
             </div>
           </nav>
 
