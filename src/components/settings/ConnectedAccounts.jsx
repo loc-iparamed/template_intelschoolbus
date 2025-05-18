@@ -8,19 +8,19 @@ const ConnectedAccounts = () => {
       id: 1,
       name: 'Google',
       connected: true,
-      icon: 'dist/google.png',
+      icon: 'public/google.png',
     },
     {
       id: 2,
       name: 'Facebook',
       connected: false,
-      icon: 'dist/facebook.svg',
+      icon: 'public/facebook.svg',
     },
     {
       id: 3,
       name: 'Zalo',
       connected: true,
-      icon: 'dist/zalo.png',
+      icon: 'public/zalo.png',
     },
   ]);
   return (
