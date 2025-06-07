@@ -6,19 +6,29 @@ import {AnimatePresence, motion} from 'framer-motion';
 import api from '../../api';
 const Notifications = () => {
   const [isAlert, setIsAlert] = useState(true);
-
+  const [isEmergency, setIsEmergency] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
   const [timing, setTiming] = useState('');
-  // const handleStartTiming = async () => {
-  //   if (!timing) return;
+  const [counter, setCounter] = useState('');
+
+  const triggerEmergency = async () => {
+    try {
+      await api.post('/busdata/test-alert/');
+
+      setAlertMsg('Success!');
+    } catch (err) {
+      console.error('Timing API Error:', err);
+      setAlertMsg('Không thể gửi thời gian đến máy chủ.');
+    }
+  };
+
+  // For reuse testing
+  // const handleSetCounter = async () => {
+  //   if (!counter) return;
 
   //   try {
-  //     await fetch('http://127.0.0.1:8001/busdata/start-timing-alert/', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({timing: parseInt(timing)}),
+  //     await api.post('/busdata/start-timing-alert/', {
+  //       timing: parseInt(counter),
   //     });
 
   //     setAlertMsg('⏱ Đã bắt đầu hẹn giờ cảnh báo!');
@@ -116,6 +126,19 @@ const Notifications = () => {
               </button>
             </div>
           </div>
+        )}
+        <ToggleSwitch
+          label={'Push Notifications'}
+          isOn={isEmergency}
+          onToggle={() => setIsEmergency(!isEmergency)}
+        />
+
+        {isEmergency && (
+          <button
+            onClick={triggerEmergency}
+            className="bg-orange-800 w-full hover:bg-yellow-600 text-white font-medium py-4  rounded-md transition focus:outline-none text-base whitespace-nowrap">
+            Trigger Emergency
+          </button>
         )}
       </SettingSection>
 
