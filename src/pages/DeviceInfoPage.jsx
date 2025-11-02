@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import Header from '../components/common/Header';
 import StorageChart from '../components/storagechart/StorageChart';
 import ThermalCpu from '../components/thermalcpu/ThermalCpu';
-import UsageCpu from '../components/UsageCpu/UsageCpu';
+import UsageCpu from '../components/usagecpu/UsageCpu';
 import NetworkSpeed from '../components/networkspeed/NetworkSpeed';
 
 const BROKER = 'wss://mqtt1.eoh.io:8084';

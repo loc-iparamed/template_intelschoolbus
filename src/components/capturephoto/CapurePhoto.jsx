@@ -75,7 +75,7 @@ const CapturePhoto = ({peoplePresent}) => {
     // Set up interval for auto-refresh if people are present
     let interval;
     if (peoplePresent > 0) {
-      interval = setInterval(fetchPhotos, 30000); // Refresh every 30 seconds
+      interval = setInterval(fetchPhotos, 2000); // Refresh every 30 seconds
     }
 
     return () => clearInterval(interval);
@@ -140,7 +140,9 @@ const CapturePhoto = ({peoplePresent}) => {
               <Camera className="h-6 w-6 text-purple-400" />
             </div>
             <div>
-              <h2 className="text-2xl font-medium text-gray-200">Capture Photo</h2>
+              <h2 className="text-2xl font-medium text-gray-200">
+                Capture Photo
+              </h2>
               {lastUpdated && (
                 <div className="flex items-center mt-1 text-xs text-gray-400">
                   <Clock className="h-3 w-3 mr-1" />
